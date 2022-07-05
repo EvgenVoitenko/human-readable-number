@@ -3,47 +3,18 @@ const numberString = number.toString();             //делаем из числ
 const numberMatrix = numberString.split('');   //раскладываем поэлементно строку в матрицу//
 const numberItems = numberMatrix.length;        //считаем количество цифр в числе//
 let result = '_';
-let numberUnits = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
-let dozens = ['ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
-let tens = ['eleven', 'twelve', 'thirty', 'fourteen', 'fifteen', 'sixteen', 'eighteen', 'nineteen'];
+let numberUnits = ['','one','two','three','four','five','six','seven','eight','nine'];
+let dozens = ['', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+let tens = ['eleven', 'twelve', 'thirty', 'fourteen', 'fifteen', 'sixteen','seventeen', 'eighteen', 'nineteen'];
 
 
-if (numberItems == 1) {                        //если число однозначное//
-switch (numberString[0]) {
-case('1'):
-result = numberUnits[0];
-break;
-case('2'):
-result = numberUnits[1];
-break;
-case('3'):
-result = numberUnits[2];
-break;
-case('4'):
-result = numberUnits[3];
-break;
-case('5'):
-result = numberUnits[4];
-break;
-case('6'):
-result = numberUnits[5];
-break;
-case('7'):
-result = numberUnits[6];
-break;
-case('8'):
-result = numberUnits[7];
-break;
-case('9'):
-result = numberUnits[8];
-break;
-}
+if (number < 9) {                        //если число однозначное//
+    result = numberUnits[numberString[0]];                     
 return result;
 }
-
                                                     //если число от 10 до 19//
 
-else if ((number >= 10) || (number < 20)) {
+else if ((number >= 10) && (number < 20)) {
     switch (numberString) {
         case('10'):
         result = 'ten';
@@ -78,4 +49,20 @@ else if ((number >= 10) || (number < 20)) {
     }
     return result;
 }
+else if ((number >= 20) && (number < 99)) { 
+        result = `${dozens[(numberString[0] - 1)]}' '${numberUnits[(numberString[1] - 1)]}`;
+        return result;      
+}
+            // Если трехзначное число заканчивается на ноль
+else if ((number >= 100) && (number <= 999) && (numberUnits[(numberString[2])] == 0)) {
+    result = `${numberUnits[(numberString[0])]} hundred ${dozens[(numberString[1])]}`;
+    return result;
+
+    // Если число трехзначное
+}
+else if ((number >= 100) && (number <= 999)) {
+    result = `${numberUnits[(numberString[0])]} hundred ${dozens[(numberString[1])]} ${numberUnits[(numberString[2])]}`;
+    return result;
+}
+
 }
