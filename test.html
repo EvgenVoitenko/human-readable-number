@@ -1,4 +1,14 @@
-module.exports = function toReadable (number) {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+function toReadable (number) {
 const numberString = number.toString();             //делаем из числа строку//
 const numberMatrix = numberString.split('');   //раскладываем поэлементно строку в матрицу//
 const numberItems = numberMatrix.length;        //считаем количество цифр в числе//
@@ -77,5 +87,15 @@ else if ((number >= 10) || (number < 20)) {
         break;
     }
     return result;
+    console.log(result);
 }
 }
+
+toReadable (11)
+  
+
+
+
+    </script>
+</body>
+</html>
