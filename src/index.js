@@ -5,14 +5,19 @@ const numberItems = numberMatrix.length;        //считаем количес�
 let result = '_';
 let numberUnits = ['','one','two','three','four','five','six','seven','eight','nine'];
 let dozens = ['', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
-let tens = ['eleven', 'twelve', 'thirty', 'fourteen', 'fifteen', 'sixteen','seventeen', 'eighteen', 'nineteen'];
+let tens = ['eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen','seventeen', 'eighteen', 'nineteen'];
 
 
-if (number < 9) {                        //если число однозначное//
+if ((number <= 9) && (number > 0)) {                        //если число однозначное//
     result = numberUnits[numberString[0]];                     
-return result;
+    return result;
 }
-                                                    //если число от 10 до 19//
+                                                             // если число ноль
+else if (number == 0) {
+    result = 'zero';
+    return result;
+}
+                                                        //если число от 10 до 19//
 
 else if ((number >= 10) && (number < 20)) {
     switch (numberString) {
@@ -49,17 +54,47 @@ else if ((number >= 10) && (number < 20)) {
     }
     return result;
 }
-else if ((number >= 20) && (number < 99)) { 
-        result = `${dozens[(numberString[0] - 1)]}' '${numberUnits[(numberString[1] - 1)]}`;
+// если число двухзначное и заканчивается на ноль
+
+else if ((number >= 20) && (number < 99) && (numberUnits[(numberString[1])] == 0) ) { 
+    result = `${dozens[numberString[0]]}`;
+    return result;      
+}
+            
+// если число от 20 до 99
+
+else if ((number >= 20) && (number <= 99)) { 
+        result = `${dozens[numberString[0]]} ${numberUnits[numberString[1]]}`;
         return result;      
 }
+
+            // Если трехзначное число заканчивается на два нуля
+else if ((number >= 100) && (number <= 999) && (numberUnits[(numberString[2])] == 0) && (numberUnits[(numberString[1])] == 0)) {
+        result = `${numberUnits[(numberString[0])]} hundred`;
+        return result;
+}
+
             // Если трехзначное число заканчивается на ноль
 else if ((number >= 100) && (number <= 999) && (numberUnits[(numberString[2])] == 0)) {
     result = `${numberUnits[(numberString[0])]} hundred ${dozens[(numberString[1])]}`;
     return result;
-
-    // Если число трехзначное
 }
+
+
+            // Если число трехзгначное и вторая цифра 1
+else if ((number >= 100) && (number <= 999) && (numberString[1] == 1))  {
+    result = `${numberUnits[(numberString[0])]} hundred ${tens[(numberString[2] - 1)]}`;
+    return result;
+}
+
+            // Если число трехзначное и вторая цифра 0
+else if ((number >= 100) && (number <= 999) && (numberString[1] == 0))  {
+    result = `${numberUnits[(numberString[0])]} hundred ${numberUnits[(numberString[2])]}`;
+    return result;
+}
+             
+            // Если число трехзначное
+
 else if ((number >= 100) && (number <= 999)) {
     result = `${numberUnits[(numberString[0])]} hundred ${dozens[(numberString[1])]} ${numberUnits[(numberString[2])]}`;
     return result;
